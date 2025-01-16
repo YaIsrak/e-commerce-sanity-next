@@ -1,10 +1,7 @@
 import Header from '@/components/layout/Header';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import '../globals.css';
-
-const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '700'] });
 
 export const metadata: Metadata = {
 	title: 'Khena-Khata Store',
@@ -18,12 +15,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<ClerkProvider dynamic>
-			<html lang='en'>
-				<body className={inter.className}>
-					<Header />
-					<main>{children}</main>
-				</body>
-			</html>
+			<Header />
+			<main>{children}</main>
 		</ClerkProvider>
 	);
 }
