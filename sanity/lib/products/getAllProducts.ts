@@ -62,3 +62,26 @@ export const getProductBySlug = async (slug: string) => {
 		return null;
 	}
 };
+
+export const getProductByCategory = async (categorySlug: string) => {
+	const PRODUCT_BY_CATEGORY_QUERY = defineQuery(`
+		*[
+			_type == "product"
+			&& references(*[_type == "category" && slug.current == $categorySlug]._id)
+		] | order(name asc)
+	`);
+
+	try {
+		const products = await sanityFetch({
+			query: PRODUCT_BY_CATEGORY_QUERY,
+			params: {
+				categorySlug,
+			},
+		});
+
+		return products.data || [];
+	} catch (error) {
+		console.error('Error fetching all products', error);
+		return [];
+	}
+};

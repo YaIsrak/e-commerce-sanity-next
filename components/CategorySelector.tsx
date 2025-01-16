@@ -39,7 +39,7 @@ export default function CategorySelector({
 					variant='outline'
 					role='combobox'
 					aria-expanded={open}
-					className='w-full max-w-full relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-primary hover:bg-primary/90 hover:text-background text-background font-bold py-2 px-4 rounded-lg'>
+					className=''>
 					{value
 						? categories.find(
 								(category) => category.slug?.current === value,
@@ -48,7 +48,7 @@ export default function CategorySelector({
 					<ChevronsUpDown className='ml-auto h-4 w-4 shrink-0 opacity-50' />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className='w-full p-0'>
+			<PopoverContent className='w-[200px] p-0'>
 				<Command>
 					<CommandInput placeholder='Search category...' />
 					<CommandList>
