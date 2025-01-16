@@ -250,7 +250,7 @@ export type SanityImageMetadata = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Sale | Order | Product | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./sanity/lib/getAllCategories.ts
+// Source: ./sanity/lib/products/getAllCategories.ts
 // Variable: ALL_CATEGORIES_QUERY
 // Query: *[            _type == "category"        ] | order(name asc)
 export type ALL_CATEGORIES_QUERYResult = Array<{
@@ -264,10 +264,42 @@ export type ALL_CATEGORIES_QUERYResult = Array<{
   description?: string;
 }>;
 
-// Source: ./sanity/lib/getAllProducts.ts
+// Source: ./sanity/lib/products/getAllProducts.ts
 // Variable: ALL_PRODUCTS_QUERY
 // Query: *[            _type == "product"        ] | order(name asc)
 export type ALL_PRODUCTS_QUERYResult = Array<{
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  price?: number;
+  category?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  stock?: number;
+}>;
+// Variable: PRODUCT_SEARCH_QUERY
+// Query: *[			_type == "product"			&& name match $searchParam		] | order(name asc)
+export type PRODUCT_SEARCH_QUERYResult = Array<{
   _id: string;
   _type: "product";
   _createdAt: string;
@@ -322,6 +354,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "\n        *[\n            _type == \"category\"\n        ] | order(name asc)\n    ": ALL_CATEGORIES_QUERYResult;
     "\n        *[\n            _type == \"product\"\n        ] | order(name asc)\n    ": ALL_PRODUCTS_QUERYResult;
+    "\n\t\t*[\n\t\t\t_type == \"product\"\n\t\t\t&& name match $searchParam\n\t\t] | order(name asc)\n\t": PRODUCT_SEARCH_QUERYResult;
     "\n        *[\n            _type == \"sale\"\n            && isActive == true\n            && couponCode == $couponCode\n        ] | order(validFrom desc) [0]\n    ": ACTIVE_SALE_BY_COUPON_QUERYResult;
   }
 }

@@ -1,7 +1,7 @@
 import EidSale from '@/components/EidSale';
 import ProductView from '@/components/ProductView';
-import { getAllCategories } from '@/sanity/lib/getAllCategories';
-import { getAllProducts } from '@/sanity/lib/getAllProducts';
+import { getAllCategories } from '@/sanity/lib/products/getAllCategories';
+import { getAllProducts } from '@/sanity/lib/products/getAllProducts';
 
 export default async function Storepage() {
 	const products = await getAllProducts();
