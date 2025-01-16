@@ -28,12 +28,14 @@ export default function Header() {
 						type='text'
 						name='query'
 						placeholder='Search for products'
-						className='bg-primary/10 outline-2'
+						className='bg-primary/10 outline-2 rounded-xl'
 					/>
 				</Form>
 
 				<div className='flex items-center space-x-2 mt-4 sm:mt-0 flex-1 sm:flex-none'>
-					<Button asChild>
+					<Button
+						asChild
+						className='rounded-xl'>
 						<Link href={'/basket'}>
 							<TrolleyIcon className='size-6' />
 							{/* todo: Span item count once global state is implemented */}
@@ -43,7 +45,9 @@ export default function Header() {
 
 					{/* User area */}
 					{user && (
-						<Button asChild>
+						<Button
+							asChild
+							className='rounded-xl'>
 							<Link href={'/order'}>
 								<PackageIcon className='size-6' />
 								<span>My Orders</span>

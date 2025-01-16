@@ -21,8 +21,6 @@ export default function ProductView({
 			<div className='flex-1'>
 				<div>
 					<ProductGrid products={products} />
-
-					<hr className='w-12 sm:w-3/4' />
 				</div>
 			</div>
 		</div>
