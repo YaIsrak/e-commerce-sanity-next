@@ -1,4 +1,5 @@
 import Header from '@/components/layout/Header';
+import { SanityLive } from '@/sanity/lib/live';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import '../globals.css';
@@ -17,6 +18,9 @@ export default function RootLayout({
 		<ClerkProvider dynamic>
 			<Header />
 			<main>{children}</main>
+
+			{/* to fetch live data from Sanity */}
+			<SanityLive />
 		</ClerkProvider>
 	);
 }
