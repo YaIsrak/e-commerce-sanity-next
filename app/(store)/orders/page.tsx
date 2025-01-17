@@ -109,9 +109,10 @@ export default async function OrdersPage() {
 									</p>
 
 									<div className='space-y-3 sm:space-y-4'>
+										{/* order Products */}
 										{order.products?.map((product) => (
 											<div
-												key={product._id}
+												key={product._key}
 												className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-2 border-b last:border-b-0'>
 												<div className='flex items-center gap-3 sm:gap-4'>
 													{product.product?.image && (
