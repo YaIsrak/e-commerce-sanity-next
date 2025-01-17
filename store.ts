@@ -74,20 +74,7 @@ export const useBasketStore = create<BasketState>()(
 				return item ? item.quantity : 0;
 			},
 
-			getGroupedItems: () => {
-				const groupedItems: { [key: string]: BasketItem } = {};
-
-				get().items.forEach((item) => {
-					const productId = item.product._id;
-					if (groupedItems[productId]) {
-						groupedItems[productId].quantity += item.quantity;
-					} else {
-						groupedItems[productId] = { ...item };
-					}
-				});
-
-				return Object.values(groupedItems);
-			},
+			getGroupedItems: () => get().items,
 		}),
 		{
 			name: 'basket-store',

@@ -1,5 +1,6 @@
 'use client';
 
+import { useBasketStore } from '@/store';
 import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { PackageIcon, TrolleyIcon } from '@sanity/icons';
 import Form from 'next/form';
@@ -9,8 +10,9 @@ import { Input } from '../ui/input';
 
 export default function Header() {
 	const { user } = useUser();
-
-	// console.log(user);
+	const itemCount = useBasketStore((state) =>
+		state.items.reduce((total, item) => total + item.quantity, 0),
+	);
 
 	return (
 		<header className='flex items-center justify-between flex-wrap px-4 py-2'>
@@ -35,10 +37,12 @@ export default function Header() {
 				<div className='flex items-center space-x-2 mt-4 sm:mt-0 flex-1 sm:flex-none'>
 					<Button
 						asChild
-						className='rounded-xl'>
+						className='rounded-xl relative'>
 						<Link href={'/basket'}>
 							<TrolleyIcon className='size-6' />
-							{/* todo: Span item count once global state is implemented */}
+							<span className='bg-red-500 text-white size-5 flex items-center justify-center text-xs rounded-full absolute -top-1 -right-1 font-semibold'>
+								{itemCount}
+							</span>
 							<span>My Basket</span>
 						</Link>
 					</Button>

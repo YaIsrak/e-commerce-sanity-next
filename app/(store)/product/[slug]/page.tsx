@@ -1,3 +1,4 @@
+import AddToBasketButtton from '@/components/AddToBasketButtton';
 import { cn, imageUrl } from '@/lib/utils';
 import { getProductBySlug } from '@/sanity/lib/products/getAllProducts';
 import Image from 'next/image';
@@ -52,9 +53,14 @@ export default async function ProductPage({
 							${product.price?.toFixed(2)}
 						</div>
 
-						<div className='prose max-w-none mb-6'>
-							{product.description}
-						</div>
+						<div className='prose max-w-none'>{product.description}</div>
+					</div>
+
+					<div className='mt-4'>
+						<AddToBasketButtton
+							product={product}
+							disabled={isOutOfStock}
+						/>
 					</div>
 				</div>
 			</div>
