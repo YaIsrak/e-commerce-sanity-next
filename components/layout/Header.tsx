@@ -52,7 +52,7 @@ export default function Header() {
 						<Button
 							asChild
 							className='rounded-xl'>
-							<Link href={'/order'}>
+							<Link href={'/orders'}>
 								<PackageIcon className='size-6' />
 								<span>My Orders</span>
 							</Link>

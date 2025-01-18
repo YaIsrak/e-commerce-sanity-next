@@ -11,7 +11,7 @@ export default async function Storepage() {
 	const categories = await getAllCategories();
 
 	return (
-		<div>
+		<div className='container mx-auto max-w-[100rem] '>
 			{/* Banner of sale */}
 			<EidSale />
 

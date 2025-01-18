@@ -1,4 +1,5 @@
 import { getActiveSaleByCouponCode } from '@/sanity/lib/sales/getActiveSaleByCouponCode';
+import ShineBorder from './ui/shine-border';
 
 export default async function EidSale() {
 	const sale = await getActiveSaleByCouponCode('EID2025');
@@ -6,7 +7,11 @@ export default async function EidSale() {
 	if (!sale?.isActive) return null;
 
 	return (
-		<div className='bg-gradient-to-r from-primary to-secondary text-background px-6 py-10 mx-4 mt-2 rounded-3xl shadow-lg'>
+		<ShineBorder
+			color={['#A07CFE', '#FE8FB5', '#FFBE7B']}
+			borderRadius={24}
+			borderWidth={8}
+			className='bg-gradient-to-r from-primary to-secondary text-background px-6 py-10 mx-4 mt-2 rounded-3xl  w-full'>
 			<div className='container mx-auto flex items-center justify-between'>
 				<div className='flex-1'>
 					<h2 className='text-3xl sm:text-5xl font-extrabold text-left mb-4'>
@@ -28,6 +33,6 @@ export default async function EidSale() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</ShineBorder>
 	);
 }

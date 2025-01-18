@@ -1,4 +1,5 @@
 import AddToBasketButtton from '@/components/AddToBasketButtton';
+import { getBlurData } from '@/lib/getBlurData';
 import { cn, imageUrl } from '@/lib/utils';
 import { getProductBySlug } from '@/sanity/lib/products/getAllProducts';
 import Image from 'next/image';
@@ -21,9 +22,15 @@ export default async function ProductPage({
 
 	const isOutOfStock = product.stock != null && product.stock <= 0;
 
+	const { base64 } = await getBlurData(
+		imageUrl(product.image || '')
+			.height(100)
+			.url(),
+	);
+
 	return (
 		<div className='container mx-auto px-4 py-8'>
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
 				{/* Image */}
 				<div
 					className={cn(
@@ -36,6 +43,8 @@ export default async function ProductPage({
 							alt={product.name || 'Product Image'}
 							fill
 							className='object-contain transition-transform duration-300 hover:scale-105'
+							placeholder='blur'
+							blurDataURL={base64}
 						/>
 					)}
 
@@ -49,14 +58,13 @@ export default async function ProductPage({
 				</div>
 
 				{/* Product Details */}
-				<div className='flex flex-col justify-between'>
+				<div className='flex flex-col'>
 					<div>
-						<h1 className='text-3xl font-bold mb-4'>{product.name}</h1>
-						<div className='text-xl font-semibold mb-4'>
+						<h1 className='text-7xl font-bold mb-4'>{product.name}</h1>
+						<div className='prose max-w-none'>{product.description}</div>
+						<div className='text-5xl font-semibold py-6'>
 							${product.price?.toFixed(2)}
 						</div>
-
-						<div className='prose max-w-none'>{product.description}</div>
 					</div>
 
 					<div className='mt-4'>
@@ -64,6 +72,10 @@ export default async function ProductPage({
 							product={product}
 							disabled={isOutOfStock}
 						/>
+
+						<p className='text-muted-foreground/60 text-sm mt-2'>
+							*Automatically will be added to your basket*
+						</p>
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,7 @@ import { forematCurrency, imageUrl } from '@/lib/utils';
 import { Product } from '@/sanity.types';
 import Image from 'next/image';
 
-export default function OrderItemCard({
+export default async function OrderItemCard({
 	product,
 	currency,
 	quantity,
